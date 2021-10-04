@@ -38,10 +38,8 @@ class NotesViewModel @Inject constructor(
                 if (state.value.noteOrder::class == event.noteOrder::class &&
                         state.value.noteOrder.orderType == event.noteOrder.orderType
                 ) {
-                    println("EQUEl")
                     return
                 }
-                println("Not EQEUL")
                 getNotes(event.noteOrder)
             }
             is NotesEvent.DeleteNote -> {
@@ -68,7 +66,6 @@ class NotesViewModel @Inject constructor(
         getNotesJob?.cancel()
         getNotesJob = noteUseCases.getNotes(noteOrder)
             .onEach { notes ->
-                println(notes)
                 _state.value = state.value.copy(
                     notes = notes,
                     noteOrder = noteOrder
